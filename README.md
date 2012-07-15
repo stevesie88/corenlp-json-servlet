@@ -2,3 +2,245 @@ corenlp-json-servlet
 ====================
 
 A Simple Servlet for Running Stanford's CoreNLP in Memory on a Tomcat Server
+
+This class is known to work with Stanford CoreNLP (http://nlp.stanford.edu/software/corenlp.shtml) 1.3.3, available for download here: http://nlp.stanford.edu/software/stanford-corenlp-2012-07-09.tgz
+
+To succussfully compile, you will need to download CoreNLP and import the following .jar files:
+joda-time-2.0-sources.jar
+joda-time.jar
+stanford-corenlp-2012-07-06-models.jar
+stanford-corenlp-2012-07-09-javadoc.jar
+stanford-corenlp-2012-07-09-sources.jar
+stanford-corenlp-2012-07-09.jar
+xom-src-1.2.6.jar
+xom.jar
+
+You may then export the servlet as a .war file and deploy in a Tomcat environment.
+
+The servlet accepts only one parameter: "freeText" and you can interface as follows:
+
+POST /CoreNLP freeText
+
+A sample is given below:
+
+POST /CoreNLP freeText="I wonder how this sentence will look when it is parsed."
+
+Response:
+
+[
+   [
+      [
+         [
+            {
+               "lemma":"I",
+               "index":1,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"I",
+               "sentId":1,
+               "pos":"PRP"
+            },
+            {
+               "lemma":"wonder",
+               "index":2,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"wonder",
+               "sentId":1,
+               "pos":"VBP"
+            },
+            {
+               "lemma":"how",
+               "index":3,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"how",
+               "sentId":1,
+               "pos":"WRB"
+            },
+            {
+               "lemma":"this",
+               "index":4,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"this",
+               "sentId":1,
+               "pos":"DT"
+            },
+            {
+               "lemma":"sentence",
+               "index":5,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"sentence",
+               "sentId":1,
+               "pos":"NN"
+            },
+            {
+               "lemma":"will",
+               "index":6,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"will",
+               "sentId":1,
+               "pos":"MD"
+            },
+            {
+               "lemma":"look",
+               "index":7,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"look",
+               "sentId":1,
+               "pos":"VB"
+            },
+            {
+               "lemma":"when",
+               "index":8,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"when",
+               "sentId":1,
+               "pos":"WRB"
+            },
+            {
+               "lemma":"it",
+               "index":9,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"it",
+               "sentId":1,
+               "pos":"PRP"
+            },
+            {
+               "lemma":"be",
+               "index":10,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"is",
+               "sentId":1,
+               "pos":"VBZ"
+            },
+            {
+               "lemma":"parse",
+               "index":11,
+               "norm_ner":null,
+               "ner":"O",
+               "word":"parsed",
+               "sentId":1,
+               "pos":"VBN"
+            },
+            {
+               "lemma":".",
+               "index":12,
+               "norm_ner":null,
+               "ner":"O",
+               "word":".",
+               "sentId":1,
+               "pos":"."
+            }
+         ],
+         [
+            {
+               "to":2,
+               "edge":"nsubj",
+               "from":1,
+               "sentId":1
+            },
+            {
+               "to":7,
+               "edge":"advmod",
+               "from":3,
+               "sentId":1
+            },
+            {
+               "to":5,
+               "edge":"det",
+               "from":4,
+               "sentId":1
+            },
+            {
+               "to":7,
+               "edge":"nsubj",
+               "from":5,
+               "sentId":1
+            },
+            {
+               "to":7,
+               "edge":"aux",
+               "from":6,
+               "sentId":1
+            },
+            {
+               "to":2,
+               "edge":"ccomp",
+               "from":7,
+               "sentId":1
+            },
+            {
+               "to":11,
+               "edge":"advmod",
+               "from":8,
+               "sentId":1
+            },
+            {
+               "to":11,
+               "edge":"nsubjpass",
+               "from":9,
+               "sentId":1
+            },
+            {
+               "to":11,
+               "edge":"auxpass",
+               "from":10,
+               "sentId":1
+            },
+            {
+               "to":7,
+               "edge":"advcl",
+               "from":11,
+               "sentId":1
+            }
+         ]
+      ]
+   ],
+   [
+      [
+         {
+            "animacy":"ANIMATE",
+            "startIndex":1,
+            "mentionType":"PRONOMINAL",
+            "isBest":true,
+            "gender":"UNKNOWN",
+            "number":"SINGULAR",
+            "endIndex":2,
+            "sentId":1,
+            "span":"I"
+         }
+      ],
+      [
+         {
+            "animacy":"INANIMATE",
+            "startIndex":4,
+            "mentionType":"NOMINAL",
+            "isBest":true,
+            "gender":"MALE",
+            "number":"SINGULAR",
+            "endIndex":6,
+            "sentId":1,
+            "span":"this sentence"
+         },
+         {
+            "animacy":"INANIMATE",
+            "startIndex":9,
+            "mentionType":"PRONOMINAL",
+            "isBest":false,
+            "gender":"UNKNOWN",
+            "number":"SINGULAR",
+            "endIndex":10,
+            "sentId":1,
+            "span":"it"
+         }
+      ]
+   ]
+]
